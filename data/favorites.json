@@ -1,0 +1,38 @@
+{
+  "favorites": [
+    {
+      "id": 320356,
+      "name": "Kingdom Hearts II Final Mix",
+      "slug": "kingdom-hearts-ii-final-mix",
+      "image": "https://media.rawg.io/media/games/cc8/cc89b08b309cf550b2cf25410a91833e.jpg",
+      "background_image": "https://media.rawg.io/media/games/cc8/cc89b08b309cf550b2cf25410a91833e.jpg",
+      "rating": 4.56,
+      "released": "2007-03-29",
+      "genres": [
+        {
+          "id": 4,
+          "name": "Action"
+        },
+        {
+          "id": 5,
+          "name": "RPG"
+        }
+      ]
+    },
+    {
+      "id": 416,
+      "name": "Grand Theft Auto: San Andreas",
+      "slug": "grand-theft-auto-san-andreas",
+      "image": "https://media.rawg.io/media/games/960/960b601d9541cec776c5fa42a00bf6c4.jpg",
+      "background_image": "https://media.rawg.io/media/games/960/960b601d9541cec776c5fa42a00bf6c4.jpg",
+      "rating": 4.5,
+      "released": "2004-10-26",
+      "genres": [
+        {
+          "id": 4,
+          "name": "Action"
+        }
+      ]
+    }
+  ]
+}

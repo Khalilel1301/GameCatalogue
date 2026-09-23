@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="GameCatalogue — découvrez, recherchez et recommandez des jeux vidéo.">
+  <title>GameCatalogue</title>
+  <link rel="stylesheet" href="./static/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="GameCatalogue accueil">
+      <span class="brand-icon">🎮</span>
+      <span>GameCatalogue</span>
+    </a>
+    <button class="mobile-menu-button" id="mobileMenuButton" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+    <nav id="mainNav" class="main-nav" aria-label="Navigation principale">
+      <a href="#home">Accueil</a>
+      <a href="#explore">Explorer</a>
+      <a href="#gamebot">GameBot</a>
+      <a href="#favorites">Favoris <span id="favoriteCount" class="nav-count">0</span></a>
+      <button id="themeToggle" class="theme-button" type="button" aria-label="Changer de thème">☀️</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero section">
+      <div class="hero-content">
+        <span class="eyebrow">CATALOGUE • RECHERCHE • IA</span>
+        <h1>Trouvez votre prochain jeu.</h1>
+        <p>Explorez des milliers de jeux vidéo, découvrez leurs informations et trouvez votre prochaine aventure.</p>
+        <form id="heroSearchForm" class="hero-search">
+          <label class="sr-only" for="heroSearch">Rechercher un jeu</label>
+          <input id="heroSearch" type="search" maxlength="100" placeholder="Rechercher un jeu..." autocomplete="off">
+          <button class="primary-button" type="submit">Rechercher</button>
+        </form>
+      </div>
+      <div class="hero-glow" aria-hidden="true"></div>
+    </section>
+
+    <section id="explore" class="section catalog-section">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">EXPLORER</span>
+          <h2>Le catalogue</h2>
+        </div>
+        <button id="clearFilters" class="ghost-button" type="button">Réinitialiser</button>
+      </div>
+
+      <div class="filters-panel">
+        <div class="filter-field search-field">
+          <label for="catalogSearch">Recherche</label>
+          <input id="catalogSearch" type="search" maxlength="100" placeholder="Nom du jeu...">
+        </div>
+        <div class="filter-field">
+          <label for="genreFilter">Genre</label>
+          <select id="genreFilter">
+            <option value="">Tous</option>
+            <option value="action">Action</option>
+            <option value="adventure">Adventure</option>
+            <option value="rpg">RPG</option>
+            <option value="strategy">Strategy</option>
+            <option value="shooter">Shooter</option>
+            <option value="racing">Racing</option>
+            <option value="sports">Sports</option>
+            <option value="indie">Indie</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label for="platformFilter">Plateforme</label>
+          <select id="platformFilter">
+            <option value="">Toutes</option>
+            <option value="pc">PC</option>
+            <option value="playstation">PlayStation</option>
+            <option value="xbox">Xbox</option>
+            <option value="switch">Nintendo Switch</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label for="sortFilter">Trier</label>
+          <select id="sortFilter">
+            <option value="-rating">Meilleure note</option>
+            <option value="-released">Plus récent</option>
+            <option value="released">Plus ancien</option>
+            <option value="name">Nom A → Z</option>
+            <option value="-name">Nom Z → A</option>
+            <option value="-metacritic">Metacritic décroissant</option>
+          </select>
+        </div>
+      </div>
+      <label class="filter-group">
+  <span>Saga</span>
+  <input
+    id="sagaFilter"
+    type="text"
+    placeholder="Ex. Grand Theft Auto"
+    autocomplete="off"
+  />
+</label>
+
+      <div id="catalogStatus" class="status-message" role="status" aria-live="polite"></div>
+      <div id="gamesGrid" class="games-grid"></div>
+      <div class="load-more-wrap">
+        <button id="loadMore" class="secondary-button" type="button">Charger plus</button>
+      </div>
+    </section>
+
+    <section id="gamebot" class="section gamebot-section">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">ASSISTANT IA</span>
+          <h2>🤖 GameBot</h2>
+        </div>
+      </div>
+      <div class="gamebot">
+        <div id="chatMessages" class="chat-messages" aria-live="polite">
+          <div class="chat-message bot-message">
+            <strong>GameBot</strong>
+            <p>Salut ! Quel type de jeu recherches-tu ? Décris-moi ce que tu veux en langage naturel.</p>
+          </div>
+        </div>
+        <form id="recommendForm" class="chat-form">
+          <label class="sr-only" for="recommendInput">Décrire le jeu recherché</label>
+          <textarea id="recommendInput" maxlength="800" rows="2" placeholder="Ex. Je veux un RPG solo avec une grosse histoire, jouable sur PC..."></textarea>
+          <button class="primary-button" type="submit">Chercher avec GameBot</button>
+        </form>
+        <div id="criteriaBox" class="criteria-box hidden"></div>
+        <div id="recommendGrid" class="games-grid"></div>
+      </div>
+    </section>
+
+    <section id="favorites" class="section favorites-section">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">MA COLLECTION</span>
+          <h2>❤️ Mes favoris</h2>
+        </div>
+      </div>
+      <div id="favoritesStatus" class="status-message"></div>
+      <div id="favoritesGrid" class="games-grid"></div>
+    </section>
+  </main>
+
+  <div id="gameModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card">
+      <button id="closeModal" class="modal-close" type="button" aria-label="Fermer">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="./static/js/script.js" defer></script>
+</body>
+</html>
